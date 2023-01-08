@@ -28,13 +28,19 @@ function playRound(userChoice, computerSelection) {
     }
 }
 
-let computerSelection = getComputerChoice();
+function game() {
+    for (let i = 0; i < 5; i++) {
+        let userChoice = prompt("Rock, Paper, Scissors? 3...2...1...").toLowerCase();
 
-let userChoice = prompt("Rock, Paper, Scissors? 3...2...1...");
+        let computerSelection = getComputerChoice();
 
-console.log("Computer chose "+computerSelection)
+        console.log("Computer chose "+computerSelection)
+        
+        playRound(userChoice, computerSelection)
+    }
+}
 
-console.log(playRound(userChoice, computerSelection));
+console.log(game());
 
 
 
