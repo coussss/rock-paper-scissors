@@ -1,26 +1,40 @@
-let computerChoice = undefined
-
 function getComputerChoice() {
 
     let x = Math.random();
     if (x < 0.33) {
-        computerChoice = "rock";
+        return("rock");
     } else if (x > 0.33 && x < 0.66) {
-        computerChoice = "paper";
+        return("paper");
     } else {
-        computerChoice = "scissors";
+        return("scissors");
     }
 }
 
-getComputerChoice()
+function playRound(userChoice, computerSelection) {
+    if (userChoice == "rock" && computerSelection == "scissors") {
+        console.log("You win! Rock beats Scissors!");
+    } else if (userChoice == "paper" && computerSelection == "scissors") {
+        console.log("You lose! Scissors beats Paper!");
+    } else if (userChoice == "rock" && computerSelection == "paper") {
+        console.log("You lose! Paper beats Rock!");
+    } else if (userChoice == "scissors" && computerSelection == "paper") {
+        console.log("You Win! Scissors beats Paper!");
+    } else if (userChoice == "paper" && computerSelection == "rock") {
+        console.log("You Win! Paper beats Rock!");
+    } else if (userChoice == "scissors" && computerSelection == "rock") {
+        console.log("You lose! Rock beats Scissors!");
+    } else if (userChoice == computerSelection) {
+        console.log("It's a draw!")
+    }
+}
 
-console.log(computerChoice)
+let computerSelection = getComputerChoice();
 
 let userChoice = prompt("Rock, Paper, Scissors? 3...2...1...");
-userChoice = userChoice.toLowerCase();
 
-if (userChoice == "rock" && computerChoice == "scissors") {
-    console.log("win");
-} else {
-    console.log("lose");
-}
+console.log("Computer chose "+computerSelection)
+
+console.log(playRound(userChoice, computerSelection));
+
+
+
