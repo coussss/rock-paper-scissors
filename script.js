@@ -1,3 +1,12 @@
+const container = document.getElementById('container')
+const score = document.getElementById('score')
+const computer = document.getElementById('computer')
+const win = document.getElementById('win')
+
+let playerWin = 0
+let computerWin = 0
+
+
 function getComputerChoice() {
 
     let x = Math.random();
@@ -10,57 +19,89 @@ function getComputerChoice() {
     }
 }
 
+const rockButton = document.getElementById('rock');
+rockButton.addEventListener('click', () => {
+    game(userChoice = "rock");
+});
+
+const paperButton = document.getElementById('paper');
+paperButton.addEventListener('click', () => {
+    game(userChoice = "paper");
+});
+
+const scissorsButton = document.getElementById('scissors');
+scissorsButton.addEventListener('click', () => {
+    game(userChoice = "scissors");
+});
+
+
 function playRound(userChoice, computerSelection) {
     if (userChoice == "rock" && computerSelection == "scissors") {
-        console.log("You win! Rock beats Scissors!");
+        container.textContent = ("You win! Rock beats Scissors!");
         playerWin = playerWin + 1;
-        console.log(`Score: ${playerWin} ${"-"} ${computerWin}`);
+        score.textContent = (`Score: ${playerWin} ${"-"} ${computerWin}`);
     } else if (userChoice == "paper" && computerSelection == "scissors") {
-        console.log("You lose! Scissors beats Paper!");
+        container.textContent = ("You lose! Scissors beats Paper!");
         computerWin = computerWin + 1;
-        console.log(`Score: ${playerWin} ${"-"} ${computerWin}`);
+        score.textContent = (`Score: ${playerWin} ${"-"} ${computerWin}`);
     } else if (userChoice == "rock" && computerSelection == "paper") {
-        console.log("You lose! Paper beats Rock!");
+        container.textContent = ("You lose! Paper beats Rock!");
         computerWin = computerWin + 1;
-        console.log(`Score: ${playerWin} ${"-"} ${computerWin}`);
+        score.textContent = (`Score: ${playerWin} ${"-"} ${computerWin}`);
     } else if (userChoice == "scissors" && computerSelection == "paper") {
-        console.log("You Win! Scissors beats Paper!");
+        container.textContent = ("You Win! Scissors beats Paper!");
         playerWin = playerWin + 1;
-        console.log(`Score: ${playerWin} ${"-"} ${computerWin}`);
+        score.textContent = (`Score: ${playerWin} ${"-"} ${computerWin}`);
     } else if (userChoice == "paper" && computerSelection == "rock") {
-        console.log("You Win! Paper beats Rock!");
+        container.textContent = ("You Win! Paper beats Rock!");
         playerWin = playerWin + 1;
-        console.log(`Score: ${playerWin} ${"-"} ${computerWin}`);
+        score.textContent = (`Score: ${playerWin} ${"-"} ${computerWin}`);
     } else if (userChoice == "scissors" && computerSelection == "rock") {
-        console.log("You lose! Rock beats Scissors!");
+        container.textContent = ("You lose! Rock beats Scissors!");
         computerWin = computerWin + 1;
-        console.log(`Score: ${playerWin} ${"-"} ${computerWin}`);
+        score.textContent = (`Score: ${playerWin} ${"-"} ${computerWin}`);
     } else if (userChoice == computerSelection) {
-        console.log("It's a draw!")
+        container.textContent = ("It's a draw!")
     }
-}
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let userChoice = prompt("Rock, Paper, Scissors? 3...2...1...").toLowerCase();
-
-        let computerSelection = getComputerChoice();
-
-        if (userChoice != "rock" && userChoice != "paper" && userChoice != "scissors") {
-            console.log("Invalid attack!");
-            i--;
+    if (playerWin == 5 || computerWin == 5) {
+        if (playerWin == 5) {
+            win.textContent = "You have beaten the computer!";
+        } else if (computerWin == 5) {
+            win.textContent = "The computer has beaten you!";
         }
 
-        console.log("Computer chose "+computerSelection)
-        
-        playRound(userChoice, computerSelection)
+        const playButton = document.createElement('button');
+        playButton.classList.add('playButton');
+        playButton.textContent = 'Play again?';
+
+        win.appendChild(playButton)
+
+        playButton.addEventListener('click', () => {
+            playAgain()
+        })
+    
     }
 }
 
-playerWin = 0
-computerWin = 0
+function game(userChoice, computerSelection) {
+    computerSelection = getComputerChoice();
 
-console.log(game());
+    computer.textContent = ("Computer chose "+computerSelection)
+        
+    playRound(userChoice, computerSelection)
+}
+
+function playAgain() {
+    playerWin = 0;
+    computerWin = 0;
+    container.textContent = "";
+    score.textContent = "";
+    computer.textContent = "";
+    win.textContent = "";
+
+    playButton.remove()
+}
 
 
 

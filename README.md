@@ -17,3 +17,14 @@ with player choice and return appropriate message
 previous game function
 -use winCount to keep track of score (if 
 winCount > 2 player wins)
+
+Plan 6/2/23:
+
+-remove logic that plays 5 rounds
+-create three buttons with event listeners that
+calls 'playRound' function with changes player
+selection to appropriate attack
+-create div to display results, and use DOM 
+methods for displaying
+-display running score and announce winner 
+after 5 rounds
